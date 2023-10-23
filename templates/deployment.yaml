@@ -40,5 +40,5 @@ spec:
         name: up-aerospike-tools
         resources: {{- toYaml .Values.upAerospikeTools.upAerospikeTools.resources | nindent
           10 }}
-      imagePullSecrets:
-      - name: regcred
+#      imagePullSecrets:
+#      - name: regcred
