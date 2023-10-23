@@ -4,7 +4,7 @@ upAerospikeTools:
   upAerospikeTools:
     image:
       repository: https://hub.docker.com/r/aerospike/aerospike-tools
-      tag: aerospike/aerospike-tools
+      tag: aerospike-tools
     imagePullPolicy: Always
     resources:
       limits:
