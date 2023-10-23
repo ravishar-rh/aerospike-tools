@@ -3,8 +3,8 @@ upAerospikeTools:
   replicas: 1
   upAerospikeTools:
     image:
-      repository: aerospike
-      tag: aerospike-tools
+      repository: github.com/aerospike/aerospike-tools.docker
+      tag: aerospike/aerospike-tools
     imagePullPolicy: Always
     resources:
       limits:
