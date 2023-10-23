@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "aerospike-tools.fullname" . }}-up-aerospike-tools
+  labels:
+  {{- include "aerospike-tools.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.upAerospikeTools.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: up-aerospike-tools
+      app.kubernetes.io/name: up-aerospike-tools
+    {{- include "aerospike-tools.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: up-aerospike-tools
+        app.kubernetes.io/name: up-aerospike-tools
+      {{- include "aerospike-tools.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - command:
+        - sh
+        - -c
+        - |
+          set -e
+          apt-get update
+          apt-get install -y curl jq vim python3
+          set +e
+          while true
+          do
+            sleep 5
+          done
+        env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.upAerospikeTools.upAerospikeTools.image.repository }}:{{ .Values.upAerospikeTools.upAerospikeTools.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.upAerospikeTools.upAerospikeTools.imagePullPolicy }}
+        name: up-aerospike-tools
+        resources: {{- toYaml .Values.upAerospikeTools.upAerospikeTools.resources | nindent
+          10 }}
+      imagePullSecrets:
+      - name: regcred

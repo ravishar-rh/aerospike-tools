@@ -1,0 +1,15 @@
+kubernetesClusterDomain: cluster.local
+upAerospikeTools:
+  replicas: 1
+  upAerospikeTools:
+    image:
+      repository: aerospike
+      tag: aerospike-tools
+    imagePullPolicy: Always
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
